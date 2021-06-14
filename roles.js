@@ -1,4 +1,4 @@
-const config = require('./config.json')
+const config = require('../config.json')
 const Discord = require("discord.js");
 const client = new Discord.Client({ partials: ['MESSAGE', 'REACTION'] });
 const emojiname = ["redmove", "yellowmove", "graymove", "greenmove", "orangemove", "purplemove", "whitemove", "pinkmove", "blackmove", "goldmove", "bluemove", "mintmove", "🎉", "🔈", "🎮", "♂️", "♀️", "💟", "redheart", "whiteheart", "greenheart", "blueheart", "purpleheart", "pinkheart", "yellowheart", "bluebutterfly", "pinkbutterfly", "whitebutterfly", "yellowbutterfly", "greenbutterfly1", "cyanbutterfly1"];
