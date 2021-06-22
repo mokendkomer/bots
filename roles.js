@@ -1,7 +1,7 @@
 const config = require('../config.json')
 const Discord = require("discord.js");
 const client = new Discord.Client({ partials: ['MESSAGE', 'REACTION'] });
-const emojiname = ["redmove", "yellowmove", "graymove", "greenmove", "orangemove", "purplemove", "whitemove", "pinkmove", "blackmove", "goldmove", "bluemove", "mintmove", "🎉", "🔈", "🎮", "♂️", "♀️", "💟", "redheart", "whiteheart", "greenheart", "blueheart", "purpleheart", "pinkheart", "yellowheart", "bluebutterfly", "pinkbutterfly", "whitebutterfly", "yellowbutterfly", "greenbutterfly1", "cyanbutterfly1"];
+const emojiname = ["whiteflower", "blueflower", "greenflower", "pinkflower", "deeppinkflower", "blackflower", "deeppurpleflower", "purpleflower", "orangeflower", "redflower", "tealflower", "yellowflower", "🎉", "🔈", "🎮", "♂️", "♀️", "💟", "redheart", "whiteheart", "greenheart", "blueheart", "purpleheart", "pinkheart", "yellowheart", "bluebutterfly", "pinkbutterfly", "whitebutterfly", "yellowbutterfly", "greenbutterfly1", "cyanbutterfly1"];
 const rolename = ["Dissociative Identity", "Antisocial Personality", "Eating Disorder", "PTSD", "Depression", "Schizophrenia", "Anxiety Disorder", "OCD", "Bipolar Disorder", "Borderline Personality", "ADHD", "Autism Spectrum Disorder", "Event Pings", "VC", "Gaming", "Male", "Female", "Other", "Anger Issues", "Emotional Unease", "Gender Dysphoria", "Panic Attacks", "Paranoia", "Self-harm", "Trust Issues", "He/Him", "She/Her", "They/Them", "Unsure/Other", "Self Help", "Supporter"];
 
 client.on("messageReactionAdd", async (reaction, user) => {
