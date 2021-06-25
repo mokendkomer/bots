@@ -8,8 +8,27 @@ const angymokned = '<:mokendangy:793852416213647371>';
 
 client.on('ready', () => {
     console.log(`yessooo I do the big workie khekhekhe`);
-    client.user.setActivity('with wittol swijaa ', {type: 'PLAYING'});
 });
+
+cron.schedule(
+    '0 9 * * *',
+    () => {
+        client.user.setActivity('with wittol swijaa ', {type: 'PLAYING'});
+    }, {
+        scheduled: true,
+        timezone: 'Asia/Kolkata'
+    }
+);
+
+cron.schedule(
+    '0 21 * * *',
+    () => {
+        client.user.setActivity('in moi dweams ', {type: 'PLAYING'});
+    }, {
+        scheduled: true,
+        timezone: 'Asia/Kolkata'
+    }
+);
 
 cron.schedule(
     '0 9-23 * * *',
