@@ -5,19 +5,21 @@ const fs = require("fs");
 const client = new Discord.Client({
 	partials: ['MESSAGE', 'REACTION']
 });
-const emotes = ['<:greenheart:858286732314017803>', '<:blueheart:858286731908743191>', '<:purpleheart:858286732410617877>', '<:whiteheart:858286732049776681>', '<:yellowheart:858286732180455475>', '<:orangeheart:858286732382306324>', '<:blackheart:858284240566091786>', '<:brokenheart:858286731907432460>']
-const channelID = ''
+const emotes = ['<:greenheart:858286732314017803>', '<:blueheart:858286731908743191>', '<:purpleheart:858286732410617877>', '<:whiteheart:858286732049776681>', '<:yellowheart:858286732180455475>', '<:orangeheart:858286732382306324>', '<:blackheart:858284240566091786>', '<:brokenheart:858286731907432460>'];
 let file = require('../checkin.json')
 const characters = file.characters
 let character = file.character
+
 const read = () => {
 	file = require('../checkin.json')
 	character = file.character
 }
+
 const write = () => {
 	file.character = character
 	fs.writeFileSync('../checkin.json', JSON.stringify(file))
 }
+
 const pickCharacter = () => {
 	character = characters[Math.floor(Math.random()*characters.length)];
 	write()
@@ -81,12 +83,23 @@ client.on('messageReactionAdd', async (reaction, user) => {
 		return reaction.remove();
 })
 
-cron.schedule('0 15 * * *', async () => {
-	pickCharacter()	  
-});
+cron.schedule(
+    '0 17 * * *',
+    () => {
+        pickCharacter();
+    }, {
+        scheduled: true,
+        timezone: 'Asia/Kolkata'
+    }
+);
 
-cron.schedule('0 17 * * *', async () => {
-	sendPrompt()
-})
-
+cron.schedule(
+    '0 19 * * *',
+    () => {
+        sendPrompt();
+    }, {
+        scheduled: true,
+        timezone: 'Asia/Kolkata'
+    }
+);
 client.login(config.katToken)

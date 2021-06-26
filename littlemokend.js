@@ -54,7 +54,7 @@ cron.schedule(
 
 //checkin image reminder
 cron.schedule(
-    '0 5 * * *',
+    '0 17 * * *',
     () => {
         client.users.cache.get(srijaDm).send(`Hewwoo!! I am cookiiee monsteww khekhekhe. Okay but I no monsteww can youu send check in pictuweee pweaseeee khekhekhe`);
     }, {
@@ -64,7 +64,7 @@ cron.schedule(
 );
 
 cron.schedule(
-    '30 6 * * *',
+    '30 18 * * *',
     () => {
         client.users.cache.get(srijaDm).send(`Hewwoo!! Can you atweast send it nowwieee the check in needs an imagee s m h s m h ${angymokned}`);
     }, {
