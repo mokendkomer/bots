@@ -1,11 +1,11 @@
-const config = require('../config.json')
+const config = require('../config.json');
 const Discord = require('discord.js');
 const client = new Discord.Client({
-	partials: ['MESSAGE', 'REACTION']
+	partials: [ 'MESSAGE', 'REACTION' ]
 });
 
 client.on('ready', () => {
-	console.log(`Logged in as ${client.user.tag}!`)
+	console.log(`Logged in as ${client.user.tag}!`);
 });
 
 client.on('messageReactionAdd', async (reaction, user) => {
@@ -20,11 +20,11 @@ client.on('messageReactionAdd', async (reaction, user) => {
 			return;
 		}
 	}
-	if (reaction.message.id === "777549816477515806") {
-		if (reaction.emoji.name === "Magic") {
+	if (reaction.message.id === '777549816477515806') {
+		if (reaction.emoji.name === 'Magic') {
 			const bigRole = reaction.message.guild.roles.cache.get('765984759431430254');
-			reaction.message.guild.member(user).roles.add(bigRole)
-			user.send(`You now have the Among Us role, and will be pinged for future games!`)
+			reaction.message.guild.member(user).roles.add(bigRole);
+			user.send(`You now have the Among Us role, and will be pinged for future games!`);
 		} else reaction.remove();
 	}
 });
@@ -40,10 +40,10 @@ client.on('messageReactionRemove', async (reaction, user) => {
 			return;
 		}
 	}
-	if (reaction.message.id === "777549816477515806" && reaction.emoji.name === "Magic") {
+	if (reaction.message.id === '777549816477515806' && reaction.emoji.name === 'Magic') {
 		const bigRole = reaction.message.guild.roles.cache.get('765984759431430254');
-		reaction.message.guild.member(user).roles.remove(bigRole)
-		user.send(`You now have lost the Among Us role, and will not be pinged for future games.`)
+		reaction.message.guild.member(user).roles.remove(bigRole);
+		user.send(`You now have lost the Among Us role, and will not be pinged for future games.`);
 	}
 });
 
