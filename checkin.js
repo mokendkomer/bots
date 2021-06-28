@@ -5,21 +5,19 @@ const fs = require("fs");
 const client = new Discord.Client({
 	partials: ['MESSAGE', 'REACTION']
 });
-const emotes = ['<:greenheart:858286732314017803>', '<:blueheart:858286731908743191>', '<:purpleheart:858286732410617877>', '<:whiteheart:858286732049776681>', '<:yellowheart:858286732180455475>', '<:orangeheart:858286732382306324>', '<:blackheart:858284240566091786>', '<:brokenheart:858286731907432460>'];
+const emotes = ['<:greenheart:858286732314017803>', '<:blueheart:858286731908743191>', '<:purpleheart:858286732410617877>', '<:whiteheart:858286732049776681>', '<:yellowheart:858286732180455475>', '<:orangeheart:858286732382306324>', '<:blackheart:858284240566091786>', '<:brokenheart:858286731907432460>']
+const channelID = ''
 let file = require('../checkin.json')
 const characters = file.characters
 let character = file.character
-
 const read = () => {
 	file = require('../checkin.json')
 	character = file.character
 }
-
 const write = () => {
 	file.character = character
 	fs.writeFileSync('../checkin.json', JSON.stringify(file))
 }
-
 const pickCharacter = () => {
 	character = characters[Math.floor(Math.random()*characters.length)];
 	write()
@@ -52,18 +50,27 @@ client.on('message', message => {
 	if(message.channel.id === "852563682419540069" && message.webhookID)
 		emotes.forEach(async emote => await message.react(emote))
 
-	if(message.content.toLowerCase().startsWith('.pickcharacter'))
+	if(message.content.toLowerCase().startsWith('.pickcharacter') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
 		pickCharacter()
-	if(message.content.toLowerCase().startsWith('.sendprompt'))
+	}
+	if(message.content.toLowerCase().startsWith('.sendprompt') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
 		sendPrompt()
-	if(message.content.toLowerCase().startsWith('.setimage')){
+	}
+	if(message.content.toLowerCase().startsWith('.setimage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
 		if(message.attachments.first()){
 			character.image = message.attachments.first().url
 		} else if(message.content.length > 10)
 			character.image = message.content.substring(10)
 		else return message.channel.send(`I couldn't find the image you want to set.`)
+		client.users.cache.get('383273509884919810').send(`Today's image was set by <@${message.author.id}>\n${character.image}`)
 		write()
 		message.channel.send(`Thank you for setting today's image.`)
+	}
+	if(message.content.toLowerCase().startsWith('.getimage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
+		if(character.image)
+			return message.channel.send(`Today's image is\n${character.image}`)
+		else
+			return message.channel.send(`Today's image has not been set yet`)
 	}
 })
 
@@ -83,23 +90,14 @@ client.on('messageReactionAdd', async (reaction, user) => {
 		return reaction.remove();
 })
 
-cron.schedule(
-    '30 18 * * *',
-    () => {
-        pickCharacter();
-    }, {
-        scheduled: true,
-        timezone: 'Asia/Kolkata'
-    }
-);
+cron.schedule('30 18 * * *', async () => {
+	pickCharacter()	  
+});
 
-cron.schedule(
-    '30 20 * * *',
-    () => {
-        sendPrompt();
-    }, {
-        scheduled: true,
-        timezone: 'Asia/Kolkata'
-    }
-);
+cron.schedule('30 20 * * *', async () => {
+	sendPrompt()
+	character.image = "";
+	write();
+})
+
 client.login(config.katToken)
