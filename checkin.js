@@ -90,14 +90,27 @@ client.on('messageReactionAdd', async (reaction, user) => {
 		return reaction.remove();
 })
 
-cron.schedule('30 18 * * *', async () => {
-	pickCharacter()	  
-});
 
-cron.schedule('30 20 * * *', async () => {
-	sendPrompt()
-	character.image = "";
-	write();
-})
+cron.schedule(
+	'30 18 * * *',
+	() => {
+		pickCharacter()	  
+	}, {
+	scheduled: true,
+	timezone: 'Asia/Kolkata'
+	}
+);
+cron.schedule(
+	'30 20 * * *',
+	() => {
+		sendPrompt()
+		character.image = "";
+		write();
+	}, {
+	scheduled: true,
+	timezone: 'Asia/Kolkata'
+	}
+);
+
 
 client.login(config.katToken)
