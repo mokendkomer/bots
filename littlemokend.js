@@ -54,19 +54,9 @@ cron.schedule(
 
 //checkin image reminder
 cron.schedule(
-    '0 17 * * *',
+    '0 20 * * *',
     () => {
-        client.users.cache.get(srijaDm).send(`Hewwoo!! I am cookiiee monsteww khekhekhe. Okay but I no monsteww can youu send check in pictuweee pweaseeee khekhekhe`);
-    }, {
-        scheduled: true,
-        timezone: 'Asia/Kolkata'
-    }
-);
-
-cron.schedule(
-    '30 18 * * *',
-    () => {
-        client.users.cache.get(srijaDm).send(`Hewwoo!! Can you atweast send it nowwieee the check in needs an imagee s m h s m h ${angymokned}`);
+        client.users.cache.get(srijaDm).send(`Hewwoo!! Can you check if someone has done the check in already and if not can you send a cute image for them khekhekhekhe`);
     }, {
         scheduled: true,
         timezone: 'Asia/Kolkata'

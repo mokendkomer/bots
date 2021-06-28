@@ -84,7 +84,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
 })
 
 cron.schedule(
-    '0 17 * * *',
+    '30 18 * * *',
     () => {
         pickCharacter();
     }, {
@@ -94,7 +94,7 @@ cron.schedule(
 );
 
 cron.schedule(
-    '0 19 * * *',
+    '30 20 * * *',
     () => {
         sendPrompt();
     }, {
