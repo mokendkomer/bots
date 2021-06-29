@@ -15,6 +15,7 @@ client.on('ready', () => {
 });
 
 client.on('guildMemberAdd', (member) => {
+    member.roles.add('859505310431838228')
     const modEmbed = new Discord.MessageEmbed();
     modEmbed.setTitle(`${member.displayName} has joined`)
     modEmbed.setDescription(`React with :white_check_mark: to verify them. \n <@${member.id}>`)
