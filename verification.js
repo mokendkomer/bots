@@ -4,21 +4,14 @@ const client = new Discord.Client({
     partials: ['MESSAGE', 'REACTION']
 });
 
-const verification = "805546881928527984";
-const pendingVerification = "809208420225122374";
-const verifiedRole = "805250027152080957";
-const mainChannel = "805250027743608833";
-const rulesChannel = "805250027396005951";
+const verification = "859438928879681576";
+const pendingVerification = "859439131275821086";
+const verifiedRole = "642545338112016408";
+const mainChannel = "641530868267089922";
+const rulesChannel = "690285956518904279";
 
 client.on('ready', () => {
     console.log("yeah i do the big workie");
-});
-
-client.on('message', message => {
-    if (message.content === "asdf")
-        client.emit('guildMemberAdd', message.member);
-    if (message.content === "qwer")
-        message.channel.send("Welcome to KendraKat Foundation <@" + message.author.id + ">!\nThis is the beginning of loving yourself\nWelcome home 💖");
 });
 
 client.on('guildMemberAdd', (member) => {

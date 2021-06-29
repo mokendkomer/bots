@@ -16,7 +16,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
     }
   }
 
-  if (reaction.message.channel.id === "805250027396005952" && user && !user.bot && reaction.message.channel.guild) {
+  if (reaction.message.channel.id === "690290421070561361" && user && !user.bot && reaction.message.channel.guild) {
     reaction.users.remove(user.id);
     for (let emoji in emojiname)
       if (reaction.emoji.name === emojiname[emoji]) {

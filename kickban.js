@@ -3,6 +3,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 client.on('message', async (message) => {
+	if (message.content.toLowerCase() !== '!d bump' && message.channel.id === "859494849429766184" && !message.author.bot)
+		message.delete();
 	if (message.content.toLowerCase().startsWith('kat kick')) {
 		const misperms = `⚠️ <@${message.author.id}> You seem to be missing the permissions to run this command.`;
 		const badkick = `⚠️ <@${message.author.id}> Please mention a user and try again.`;
@@ -59,4 +61,4 @@ client.on('message', async (message) => {
 	}
 });
 
-client.login(config.katToken);
+client.login(config.katProdToken);

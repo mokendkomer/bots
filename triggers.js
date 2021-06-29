@@ -34,8 +34,8 @@ client.on("message", (message) => {
     return
   }
   if(message.content.toLowerCase().startsWith('showtw')){
-    if(message.channel.id !== '805250027743608839' && message.channel.id !== '805250029182386230')
-      return message.channel.send(`:warning: This command cannot be run outside <#805250027743608839> and <#805250029182386230>`)
+    if(message.channel.id !== '668329314391162911' && message.channel.id !== '664023523899211776')
+      return message.channel.send(`:warning: This command cannot be run outside <#668329314391162911> and <#664023523899211776>`)
     message.channel.send(`The trigger words are:\n||${triggers.join(', ')}||`)
      return
   }
@@ -53,13 +53,6 @@ client.on("message", (message) => {
   if (
     triggers.some((element) =>
       message.content.toLowerCase().includes(element))
-    // triggers.some((element) =>
-    //   message.content.toLowerCase().includes(`${element} `)
-    // ) ||
-    // triggers.some((element) =>
-    //   message.content.toLowerCase().includes(` ${element}`)
-    // ) ||
-    // triggers.some((element) => message.content.toLowerCase() === element)
   ) {
     message.channel
       .createWebhook(message.member.displayName, {

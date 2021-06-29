@@ -5,8 +5,8 @@ const fs = require("fs");
 const client = new Discord.Client({
 	partials: ['MESSAGE', 'REACTION']
 });
-const emotes = ['<:greenheart:858286732314017803>', '<:blueheart:858286731908743191>', '<:purpleheart:858286732410617877>', '<:whiteheart:858286732049776681>', '<:yellowheart:858286732180455475>', '<:orangeheart:858286732382306324>', '<:blackheart:858284240566091786>', '<:brokenheart:858286731907432460>']
-const channelID = ''
+const checkin = '647526576707338251'
+const emotes = ['<:greenheart:859495100497264670>','<:blueheart:859496195331850290>','<:purpleheart:859496196028760064>','<:whiteheart:859496196350672944>','<:yellowheart:859495100543401994>','<:orangeheart:859496195885498408>','<:blackheart:859495100492808232>','<:brokenheart:859496195683909652>']
 let file = require('../checkin.json')
 const characters = file.characters
 let character = file.character
@@ -34,7 +34,7 @@ const sendPrompt = () => {
 	const embed = new Discord.MessageEmbed()
 	embed.setColor('5af27d')
 	embed.setTitle(`How are you feeling today? 🌈`)
-	embed.setDescription(`<:greenheart:858286732314017803> - Amazing\n<:blueheart:858286731908743191> - Good\n<:purpleheart:858286732410617877> - Fine/Okay/Neutral\n<:whiteheart:858286732049776681> - I don't know how I'm feeling right now\n<:yellowheart:858286732180455475> - I think I will be fine\n<:orangeheart:858286732382306324> - I am struggling right now\n<:blackheart:858284240566091786> - I am having a really hard time and need someone to talk to\n<:brokenheart:858286731907432460> - I am at my lowest, and in a really dark place right now`)
+	embed.setDescription(`<:greenheart:859495100497264670> - Amazing\n<:blueheart:859496195331850290> - Good\n<:purpleheart:859496196028760064> - Fine/Okay/Neutral\n<:whiteheart:859496196350672944> - I don't know how I'm feeling right now\n<:yellowheart:859495100543401994> - I think I will be fine\n<:orangeheart:859496195885498408> - I am struggling right now\n<:blackheart:859495100492808232> - I am having a really hard time and need someone to talk to\n<:brokenheart:859496195683909652> - I am at my lowest, and in a really dark place right now`)
 	if(character.image)
 		embed.setImage(character.image)
 	const webhookClient = new Discord.WebhookClient(config.checkinWebhook.id, config.checkinWebhook.token)
@@ -43,11 +43,10 @@ const sendPrompt = () => {
 		avatarURL: character.avatar,
 		embeds: [embed]
 	})
-
 }
 
 client.on('message', message => {
-	if(message.channel.id === "852563682419540069" && message.webhookID)
+	if(message.channel.id === checkin && message.webhookID)
 		emotes.forEach(async emote => await message.react(emote))
 
 	if(message.content.toLowerCase().startsWith('.pickcharacter') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
@@ -86,7 +85,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
 		}
 	}
 
-	if (reaction.message.channel.id === '852563682419540069' && !emotes.includes(reaction.emoji.name))
+	if (reaction.message.channel.id === checkin && !emotes.includes(reaction.emoji.name))
 		return reaction.remove();
 })
 
