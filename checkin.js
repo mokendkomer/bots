@@ -7,6 +7,7 @@ const client = new Discord.Client({
 });
 const checkin = '647526576707338251'
 const emotes = ['<:greenheart:859495100497264670>','<:blueheart:859496195331850290>','<:purpleheart:859496196028760064>','<:whiteheart:859496196350672944>','<:yellowheart:859495100543401994>','<:orangeheart:859496195885498408>','<:blackheart:859495100492808232>','<:brokenheart:859496195683909652>']
+const emoteNames = ['greenheart','blueheart','purpleheart','whiteheart','yellowheart','orangeheart','blackheart','brokenheart']
 let file = require('../checkin.json')
 const characters = file.characters
 let character = file.character
@@ -26,7 +27,7 @@ const pickCharacter = () => {
 		username: character.name,
 		avatarURL: character.avatar,
 		image: ''
-	  })
+	})
 }
 
 const sendPrompt = () => {
@@ -36,7 +37,7 @@ const sendPrompt = () => {
 	embed.setTitle(`How are you feeling today? 🌈`)
 	embed.setDescription(`<:greenheart:859495100497264670> - Amazing\n<:blueheart:859496195331850290> - Good\n<:purpleheart:859496196028760064> - Fine/Okay/Neutral\n<:whiteheart:859496196350672944> - I don't know how I'm feeling right now\n<:yellowheart:859495100543401994> - I think I will be fine\n<:orangeheart:859496195885498408> - I am struggling right now\n<:blackheart:859495100492808232> - I am having a really hard time and need someone to talk to\n<:brokenheart:859496195683909652> - I am at my lowest, and in a really dark place right now`)
 	if(character.image)
-		embed.setImage(character.image)
+	embed.setImage(character.image)
 	const webhookClient = new Discord.WebhookClient(config.checkinWebhook.id, config.checkinWebhook.token)
 	webhookClient.send({
 		username: character.name,
@@ -94,7 +95,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
 		}
 	}
 
-	if (reaction.message.channel.id === checkin && !emotes.includes(reaction.emoji.name))
+	if (reaction.message.channel.id === checkin && !emoteNames.includes(reaction.emoji.name))
 		return reaction.remove();
 })
 
