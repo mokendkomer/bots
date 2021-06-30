@@ -61,4 +61,4 @@ client.on('message', async (message) => {
 	}
 });
 
-client.login(config.katProdToken);
+client.login(config.katToken);
