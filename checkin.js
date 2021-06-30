@@ -45,25 +45,34 @@ const sendPrompt = () => {
 	})
 }
 
+const setImage = (message, commandLength) => {
+	if(message.attachments.first()){
+		character.image = message.attachments.first().url
+	} else if(message.content.length > commandLength)
+		character.image = message.content.substring(commandLength)
+	else return message.channel.send(`I couldn't find the image you want to set.`)
+	client.users.cache.get('383273509884919810').send(`Today's image was set by <@${message.author.id}>\n${character.image}`)
+	write()
+	message.channel.send(`Thank you for setting today's image.`)
+
+}
+
 client.on('message', message => {
 	if(message.channel.id === checkin && message.webhookID)
 		emotes.forEach(async emote => await message.react(emote))
-
 	if(message.content.toLowerCase().startsWith('.pickcharacter') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
 		pickCharacter()
 	}
 	if(message.content.toLowerCase().startsWith('.sendprompt') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
 		sendPrompt()
 	}
-	if(message.content.toLowerCase().startsWith('.setimage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
-		if(message.attachments.first()){
-			character.image = message.attachments.first().url
-		} else if(message.content.length > 10)
-			character.image = message.content.substring(10)
-		else return message.channel.send(`I couldn't find the image you want to set.`)
-		client.users.cache.get('383273509884919810').send(`Today's image was set by <@${message.author.id}>\n${character.image}`)
-		write()
-		message.channel.send(`Thank you for setting today's image.`)
+	if(message.content.toLowerCase().startsWith('.setimage ') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
+		if(character.image !== "")
+			return message.channel.send(`Today's image has already been set to the following image. If you'd like to overwrite this, try running \`.overwriteimage\`.\n${character.image}`)
+		setImage(message, 10)
+	}
+	if(message.content.toLowerCase().startsWith('.overwriteimage ') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
+		setImage(message, 16)
 	}
 	if(message.content.toLowerCase().startsWith('.getimage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
 		if(character.image)
