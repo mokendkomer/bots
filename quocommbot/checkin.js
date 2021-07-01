@@ -23,7 +23,7 @@ const pickCharacter = () => {
 	character.image = ""
 	character.message = ""
 	write()
-	const webhookClient = new Discord.WebhookClient(config.notCheckinWebhook.id, config.notCheckinWebhook.token)
+	const webhookClient = new Discord.WebhookClient(config.qnotCheckinWebhook.id, config.qnotCheckinWebhook.token)
     webhookClient.send(`I will do the checkin today. Be sure to set an image I can use for checkin using the '.setimage' command`, {
 		username: character.name,
 		avatarURL: character.avatar,
@@ -40,7 +40,7 @@ const sendPrompt = () => {
 	
 	if(character.image)
 		embed.setImage(character.image)
-	const webhookClient = new Discord.WebhookClient(config.checkinWebhook.id, config.checkinWebhook.token)
+	const webhookClient = new Discord.WebhookClient(config.qcheckinWebhook.id, config.qcheckinWebhook.token)
 	webhookClient.send({
 		username: character.name,
 		avatarURL: character.avatar,
