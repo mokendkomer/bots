@@ -123,7 +123,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
 
 
 cron.schedule(
-	'30 18 * * *',
+	'0 17 * * *',
 	() => {
 		pickCharacter()	  
 	}, {
@@ -132,7 +132,7 @@ cron.schedule(
 	}
 );
 cron.schedule(
-	'30 20 * * *',
+	'0 19 * * *',
 	() => {
 		sendPrompt()
 		character.image = "";
