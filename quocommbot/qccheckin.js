@@ -36,8 +36,9 @@ const sendPrompt = () => {
 	const embed = new Discord.MessageEmbed()
 	embed.setColor('5af27d')
 	embed.setTitle(`How are you feeling today?`)
-	embed.setDescription(`❤️ - Amazing\n🧡 - Good\n💛 - Fine/Okay/Neutral\n🤍 - I don't know how I'm feeling right now\n💚 - I think I will be fine\n💙 - I'm struggling right now\n💜 - I'm having a really hard time and need somebody to talk to\n💔 - I'm at my lowest, and in a really dark place right now.\n\n${character.message}`)
-	
+	if(character.message.length)
+		embed.setDescription(character.message)
+	embed.addField(`React with how you're feeling!`,`❤️ - Amazing\n🧡 - Good\n💛 - Fine/Okay/Neutral\n🤍 - I don't know how I'm feeling right now\n💚 - I think I will be fine\n💙 - I'm struggling right now\n💜 - I'm having a really hard time and need somebody to talk to\n💔 - I'm at my lowest, and in a really dark place right now.\n\n${character.message}`)
 	if(character.image)
 		embed.setImage(character.image)
 	const webhookClient = new Discord.WebhookClient(config.qcheckinWebhook.id, config.qcheckinWebhook.token)
@@ -58,6 +59,8 @@ const setImage = (message, commandLength) => {
 	message.channel.send(`Thank you for setting today's image.`)
 }
 const setMessage = (message, commandLength) => {
+	if(message.content.length > (2048 + commandLength))
+		return message.channel.send(`Your message is too long by ${2048 + commandLength - message.content.length} characters.`)
 	if(message.content.length > commandLength)
 		character.message = message.content.substring(commandLength)
 	else return message.channel.send(`I couldn't find the message you want to set.`)
@@ -68,35 +71,35 @@ const setMessage = (message, commandLength) => {
 client.on('message', message => {
 	if(message.channel.id === checkin && message.webhookID)
 		emotes.forEach(async emote => await message.react(emote))
-	if(message.content.toLowerCase().startsWith('.pickcharacter') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
+	if(message.content.toLowerCase().startsWith('q.pickcharacter') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
 		pickCharacter()
 	}
-	if(message.content.toLowerCase().startsWith('.sendprompt') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
+	if(message.content.toLowerCase().startsWith('q.sendprompt') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
 		sendPrompt()
 	}
-	if(message.content.toLowerCase().startsWith('.setimage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
+	if(message.content.toLowerCase().startsWith('q.setimage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
 		if(character.image.length)
 			return message.channel.send(`Today's image has already been set to the following image. If you'd like to overwrite this, try running \`.overwriteimage\`.\n${character.image}`)
-		setImage(message, 10)
+		setImage(message, 11)
 	}
-	if(message.content.toLowerCase().startsWith('.overwriteimage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
-		setImage(message, 16)
+	if(message.content.toLowerCase().startsWith('q.overwriteimage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
+		setImage(message, 17)
 	}
-	if(message.content.toLowerCase().startsWith('.getimage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
+	if(message.content.toLowerCase().startsWith('q.getimage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
 		if(character.image.length)
 			return message.channel.send(`Today's image is\n${character.image}`)
 		else
 			return message.channel.send(`Today's image has not been set yet`)
 	}
-	if(message.content.toLowerCase().startsWith('.setmessage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
+	if(message.content.toLowerCase().startsWith('q.setmessage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
 		if(character.message.length)
 			return message.channel.send(`Today's message has already been set to the following. If you'd like to overwrite this, try running \`.overwritemessage\`.\n${character.message}`)
-		setMessage(message, 12)
+		setMessage(message, 13)
 	}
-	if(message.content.toLowerCase().startsWith('.overwritemessage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
-		setMessage(message, 18)
+	if(message.content.toLowerCase().startsWith('q.overwritemessage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
+		setMessage(message, 19)
 	}
-	if(message.content.toLowerCase().startsWith('.getmessage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
+	if(message.content.toLowerCase().startsWith('q.getmessage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
 		if(character.message.length)
 			return message.channel.send(`Today's message is\n${character.message}`)
 		else
@@ -150,4 +153,4 @@ process.on('unhandledRejection', (error) => {
 
 
 
-client.login(config.QuoCommToken)
+client.login(config.teslaToken)
