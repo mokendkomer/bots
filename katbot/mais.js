@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const ms = require('ms');
 const client = new Discord.Client();
 
-client.on('message', (message) => {
+client.on('message', async (message) => {
 	if (message.content.toLowerCase().startsWith('kat purge')) {
 		const misperms = `⚠️ <@${message.author.id}> You seem to be missing the permissions to run this command.`;
 		if (!message.member.hasPermission([ 'MANAGE_MESSAGES' ])) return message.channel.send(misperms);
