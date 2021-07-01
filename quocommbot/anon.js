@@ -41,4 +41,4 @@ client.on("message", (message) => {
 		message.channel.send(prompt);
 });
 
-client.login(config.QuoCommToken)
+client.login(config.anonToken)
