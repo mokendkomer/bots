@@ -7,23 +7,23 @@ const client = new Discord.Client({
 });
 const checkin = '845817544484323349'
 const emotes = ['❤️','🧡','💛','🤍','💚','💙','💜','💔']
-let file = require('./qcheckin.json')
+let file = require('./checkin.json')
 const characters = file.characters
 let character = file.character
 const read = () => {
-	file = require('../qcheckin.json')
+	file = require('../checkin.json')
 	character = file.character
 }
 const write = () => {
 	file.character = character
-	fs.writeFileSync('../qcheckin.json', JSON.stringify(file))
+	fs.writeFileSync('../checkin.json', JSON.stringify(file))
 }
 const pickCharacter = () => {
 	character = characters[Math.floor(Math.random()*characters.length)];
 	character.image = ""
 	character.message = ""
 	write()
-	const webhookClient = new Discord.WebhookClient(config.qnotCheckinWebhook.id, config.qnotCheckinWebhook.token)
+	const webhookClient = new Discord.WebhookClient(config.notCheckinWebhook.id, config.notCheckinWebhook.token)
     webhookClient.send(`I will do the checkin today. Be sure to set an image I can use for checkin using the '.setimage' command`, {
 		username: character.name,
 		avatarURL: character.avatar,
@@ -40,7 +40,7 @@ const sendPrompt = () => {
 	
 	if(character.image)
 		embed.setImage(character.image)
-	const webhookClient = new Discord.WebhookClient(config.qcheckinWebhook.id, config.qcheckinWebhook.token)
+	const webhookClient = new Discord.WebhookClient(config.checkinWebhook.id, config.checkinWebhook.token)
 	webhookClient.send({
 		username: character.name,
 		avatarURL: character.avatar,

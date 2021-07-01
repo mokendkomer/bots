@@ -1,3 +1,7 @@
+const config = require('./config.json')
+const Discord = require("discord.js");
+const client = new Discord.Client({ partials: ['MESSAGE', 'REACTION'] });
+
 client.on("message", (message) => {
 	if(message.channel.type !== "dm")
 	  return;
@@ -36,3 +40,5 @@ client.on("message", (message) => {
 		client.channels.cache.get(channel).send(`${message.content.substring(substring)}`);
 		message.channel.send(prompt);
 });
+
+client.login(config.QuoCommToken)

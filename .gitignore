@@ -105,3 +105,8 @@ dist
 
 # mokendfiles
 config.json
+checkin.json
+triggers.json
+verifiers.json
+errorthing.txt
+reminders.json

@@ -1,8 +1,8 @@
-const config = require("../config.json");
+const config = require("./config.json");
 const Discord = require("discord.js");
 const fs = require("fs");
 const client = new Discord.Client();
-let triggers = require("../triggers.json");
+let triggers = require("./triggers.json");
 
 client.on("message", (message) => {
   if (message.author.bot || !message.member) return;
@@ -19,9 +19,9 @@ client.on("message", (message) => {
         `:warning: ||${word}|| is already a trigger word.`
       );
     triggers.push(word.toLowerCase());
-    fs.writeFileSync("../triggers.json", JSON.stringify(triggers));
+    fs.writeFileSync("./triggers.json", JSON.stringify(triggers));
     message.channel.send(`Thank you for adding ||${word}|| as a trigger word`);
-    triggers = require("../triggers.json");
+    triggers = require("./triggers.json");
     return;
   }
   if (message.content.toLowerCase().startsWith("removetw ")) {
@@ -36,11 +36,11 @@ client.on("message", (message) => {
         `:warning: ||${word}|| doesn't exist in the list of trigger words.`
       );
     triggers.splice(index, 1);
-    fs.writeFileSync("../triggers.json", JSON.stringify(triggers));
+    fs.writeFileSync("./triggers.json", JSON.stringify(triggers));
     message.channel.send(
       `Thank you for removing ||${word}|| from the trigger words.`
     );
-    triggers = require("../triggers.json");
+    triggers = require("./triggers.json");
     return;
   }
   if (message.content.toLowerCase().startsWith("showtw")) {

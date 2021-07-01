@@ -1,4 +1,4 @@
-const config = require('../config.json');
+const config = require('./config.json');
 const Discord = require("discord.js");
 const cron = require('node-cron');
 const fs = require("fs");
@@ -8,16 +8,16 @@ const client = new Discord.Client({
 const checkin = '647526576707338251'
 const emotes = ['<:greenheart:859495100497264670>','<:blueheart:859496195331850290>','<:purpleheart:859496196028760064>','<:whiteheart:859496196350672944>','<:yellowheart:859495100543401994>','<:orangeheart:859496195885498408>','<:blackheart:859495100492808232>','<:brokenheart:859496195683909652>']
 const emoteNames = ['greenheart','blueheart','purpleheart','whiteheart','yellowheart','orangeheart','blackheart','brokenheart']
-let file = require('../checkin.json')
+let file = require('./checkin.json')
 const characters = file.characters
 let character = file.character
 const read = () => {
-	file = require('../checkin.json')
+	file = require('./checkin.json')
 	character = file.character
 }
 const write = () => {
 	file.character = character
-	fs.writeFileSync('../checkin.json', JSON.stringify(file))
+	fs.writeFileSync('./checkin.json', JSON.stringify(file))
 }
 const pickCharacter = () => {
 	const random = characters[Math.floor(Math.random()*characters.length)];
