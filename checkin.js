@@ -20,7 +20,9 @@ const write = () => {
 	fs.writeFileSync('../checkin.json', JSON.stringify(file))
 }
 const pickCharacter = () => {
-	character = characters[Math.floor(Math.random()*characters.length)];
+	const random = characters[Math.floor(Math.random()*characters.length)];
+	character.name = random.name
+	character.avatar = random.avatar
 	write()
 	const webhookClient = new Discord.WebhookClient(config.notCheckinWebhook.id, config.notCheckinWebhook.token)
     webhookClient.send(`I will do the checkin today. Be sure to set an image I can use for checkin using the '.setimage' command`, {
@@ -68,7 +70,7 @@ client.on('message', message => {
 		sendPrompt()
 	}
 	if(message.content.toLowerCase().startsWith('.setimage ') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
-		if(character.image !== "")
+		if(character.image.length)
 			return message.channel.send(`Today's image has already been set to the following image. If you'd like to overwrite this, try running \`.overwriteimage\`.\n${character.image}`)
 		setImage(message, 10)
 	}
@@ -76,7 +78,7 @@ client.on('message', message => {
 		setImage(message, 16)
 	}
 	if(message.content.toLowerCase().startsWith('.getimage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
-		if(character.image)
+		if(!character.image.length)
 			return message.channel.send(`Today's image is\n${character.image}`)
 		else
 			return message.channel.send(`Today's image has not been set yet`)
@@ -113,7 +115,7 @@ cron.schedule(
 	'30 20 * * *',
 	() => {
 		sendPrompt()
-		character.image = "";
+		character.image = ""
 		write();
 	}, {
 	scheduled: true,
