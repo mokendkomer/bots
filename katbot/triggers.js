@@ -2,7 +2,7 @@ const config = require("./config.json");
 const Discord = require("discord.js");
 const fs = require("fs");
 const client = new Discord.Client();
-let triggers = require("./triggers.json");
+let triggers = require("../../json/triggers.json");
 
 client.on("message", (message) => {
   if (message.author.bot || !message.member) return;

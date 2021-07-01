@@ -1,4 +1,4 @@
-const config = require('./config.json')
+const config = require('../../json/config.json')
 const Discord = require("discord.js");
 const fs = require('fs');
 const cron = require('node-cron')
@@ -7,8 +7,8 @@ const mokendDm = '845575192688459786';
 const srijaDm = '845575380970504224';
 let reminders = [];
 let embed = {}
-const write = () => fs.writeFileSync('./reminders.json', JSON.stringify(reminders));
-const read = () => reminders = JSON.parse(fs.readFileSync('./reminders.json'));
+const write = () => fs.writeFileSync('../../json/reminders.json', JSON.stringify(reminders));
+const read = () => reminders = JSON.parse(fs.readFileSync('../../json/reminders.json'));
 const makeEmbed = () => {
 	embed = new Discord.MessageEmbed()
 	embed.setColor('f2a0eb')
