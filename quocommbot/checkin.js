@@ -7,16 +7,16 @@ const client = new Discord.Client({
 });
 const checkin = '845817544484323349'
 const emotes = ['❤️','🧡','💛','🤍','💚','💙','💜','💔']
-let file = require('../../json/checkin.json')
+let file = require('../../json/kkfcheckin.json')
 const characters = file.characters
 let character = file.character
 const read = () => {
-	file = require('.../../json/checkin.json')
+	file = require('../../json/kkfcheckin.json')
 	character = file.character
 }
 const write = () => {
 	file.character = character
-	fs.writeFileSync('.../../json/checkin.json', JSON.stringify(file))
+	fs.writeFileSync('../../json/kkfcheckin.json', JSON.stringify(file))
 }
 const pickCharacter = () => {
 	character = characters[Math.floor(Math.random()*characters.length)];
