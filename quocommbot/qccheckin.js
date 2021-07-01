@@ -38,7 +38,7 @@ const sendPrompt = () => {
 	embed.setTitle(`How are you feeling today?`)
 	if(character.message.length)
 		embed.setDescription(character.message)
-	embed.addField(`React with how you're feeling!`,`❤️ - Amazing\n🧡 - Good\n💛 - Fine/Okay/Neutral\n🤍 - I don't know how I'm feeling right now\n💚 - I think I will be fine\n💙 - I'm struggling right now\n💜 - I'm having a really hard time and need somebody to talk to\n💔 - I'm at my lowest, and in a really dark place right now.\n\n${character.message}`)
+	embed.addField(`React with how you're feeling!`,`❤️ - Amazing\n🧡 - Good\n💛 - Fine/Okay/Neutral\n🤍 - I don't know how I'm feeling right now\n💚 - I think I will be fine\n💙 - I'm struggling right now\n💜 - I'm having a really hard time and need somebody to talk to\n💔 - I'm at my lowest, and in a really dark place right now.`)
 	if(character.image)
 		embed.setImage(character.image)
 	const webhookClient = new Discord.WebhookClient(config.qcheckinWebhook.id, config.qcheckinWebhook.token)
@@ -153,4 +153,4 @@ process.on('unhandledRejection', (error) => {
 
 
 
-client.login(config.teslaToken)
+client.login(config.QuoCommToken)
