@@ -89,7 +89,7 @@ client.on('ready', () => {
 	console.log('I am weady to twi mi bestt big pwomise');
 })
 
-cron.schedule('0 9-23/2 * * *', () => {
+cron.schedule('0 8-22/2 * * *', () => {
 	read()
 	remind()
 })

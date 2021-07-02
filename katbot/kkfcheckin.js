@@ -38,8 +38,8 @@ const sendPrompt = () => {
 	embed.setColor('5af27d')
 	embed.setTitle(`How are you feeling today? 🌈`)
 	embed.setDescription(`<:greenheart:859495100497264670> - Amazing\n<:blueheart:859496195331850290> - Good\n<:purpleheart:859496196028760064> - Fine/Okay/Neutral\n<:whiteheart:859496196350672944> - I don't know how I'm feeling right now\n<:yellowheart:859495100543401994> - I think I will be fine\n<:orangeheart:859496195885498408> - I am struggling right now\n<:blackheart:859495100492808232> - I am having a really hard time and need someone to talk to\n<:brokenheart:859496195683909652> - I am at my lowest, and in a really dark place right now`)
-	if(character.image)
-	embed.setImage(character.image)
+	if(character.image.length)
+		embed.setImage(character.image)
 	const webhookClient = new Discord.WebhookClient(config.checkinWebhook.id, config.checkinWebhook.token)
 	webhookClient.send({
 		username: character.name,
