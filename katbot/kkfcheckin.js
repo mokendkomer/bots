@@ -78,7 +78,7 @@ client.on('message', message => {
 		setImage(message, 16)
 	}
 	if(message.content.toLowerCase().startsWith('.getimage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
-		if(!character.image.length)
+		if(character.image.length)
 			return message.channel.send(`Today's image is\n${character.image}`)
 		else
 			return message.channel.send(`Today's image has not been set yet`)

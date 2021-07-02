@@ -16,9 +16,9 @@ const makeEmbed = () => {
 let text = ``
 const wittleTolk = (thing) => {
 	text = thing
-	text = text.replace('r', 'w')
-	text = text.replace('l', 'w')
-	text = text.replace('my', 'moi')
+	text = text.split("r").join("w");
+	text = text.split("l").join("w");
+	text = text.split("my").join("moi");
 }
 const { uniqueNamesGenerator, adjectives, colors, animals } = require('unique-names-generator');
 
