@@ -108,6 +108,18 @@ client.on('message', message => {
 		else
 			return message.channel.send(`Today's message has not been set yet`)
 	}
+	if(message.content.toLowerCase() === "q.checkin" && !message.author.bot)
+    {
+        const embed = new Discord.MessageEmbed();
+        embed.setTitle(`Check-in commands`);
+        embed.setColor('#099c92');
+        embed.addField("q.setimage [attachment/link]","Attach an image or the link of an image to send with the embed");
+        embed.addField("q.setmessage [your message]","Add a cute message you'd like to send along with the embed (must be below 2000 characters)");
+        embed.addField("q.getimage","Check which image is set to be sent with the embed");
+        embed.addField("q.getmessage","Check which message is set to be sent along with the embed");
+        embed.addField("How does it work?","At a pre-set time (11:30 a.m. GMT), a randomly picked character will send a reminder in <#860137682759188490> reminding you to set an image and message (both optional but cute if there) for the check-in.\nYou can use the above mentioned functions to do the same. At 1:30 p.m. GMT, the character will send a text to the <#845817544484323349> channel asking people how they are feeling along with the image and message you might have set. :) ")
+        message.channel.send(embed);
+    }
 
 })
 

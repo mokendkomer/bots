@@ -5,7 +5,7 @@ const pendingVerification = `587744410498760707`;
 const verification = `587156836205985793`
 const member = `587187354851082250`
 const readme = `587156775346765834`
-const park = `587321519051636776`
+const park = `587152863373819904`
 const verifiers =  require('../../json/verifiers.json')
 const findVerifier = (id) => {
 	return verifiers.find(person => person.id === id)
