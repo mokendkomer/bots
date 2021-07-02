@@ -7,16 +7,16 @@ const client = new Discord.Client({
 });
 const checkin = '845817544484323349'
 const emotes = ['❤️','🧡','💛','🤍','💚','💙','💜','💔']
-let file = require('../../json/kkfcheckin.json')
+let file = require('../../json/qccheckin.json')
 const characters = file.characters
 let character = file.character
 const read = () => {
-	file = require('../../json/kkfcheckin.json')
+	file = require('../../json/qccheckin.json')
 	character = file.character
 }
 const write = () => {
 	file.character = character
-	fs.writeFileSync('../../json/kkfcheckin.json', JSON.stringify(file))
+	fs.writeFileSync('../../json/qccheckin.json', JSON.stringify(file))
 }
 const pickCharacter = () => {
 	character = characters[Math.floor(Math.random()*characters.length)];
@@ -33,19 +33,17 @@ const pickCharacter = () => {
 
 const sendPrompt = () => {
 	read()
-	const embed = new Discord.MessageEmbed()
-	embed.setColor('5af27d')
-	embed.setTitle(`How are you feeling today?`)
-	if(character.message.length)
-		embed.setDescription(character.message)
-	embed.addField(`React with how you're feeling!`,`❤️ - Amazing\n🧡 - Good\n💛 - Fine/Okay/Neutral\n🤍 - I don't know how I'm feeling right now\n💚 - I think I will be fine\n💙 - I'm struggling right now\n💜 - I'm having a really hard time and need somebody to talk to\n💔 - I'm at my lowest, and in a really dark place right now.`)
-	if(character.image)
-		embed.setImage(character.image)
+	let message = `${character.message.length ? character.message + `\n\nSo, how are you feeling today?` : '**Hello! How are you feeling today?**'}\n❤️ - Amazing\n🧡 - Good\n💛 - Fine/Okay/Neutral\n🤍 - I don't know how I'm feeling right now\n💚 - I think I will be fine\n💙 - I'm struggling right now\n💜 - I'm having a really hard time and need somebody to talk to\n💔 - I'm at my lowest, and in a really dark place right now.`
 	const webhookClient = new Discord.WebhookClient(config.qcheckinWebhook.id, config.qcheckinWebhook.token)
-	webhookClient.send({
+	// const webhookClient = new Discord.WebhookClient(config.qnotCheckinWebhook.id, config.qnotCheckinWebhook.token)
+	webhookClient.send(message, {
 		username: character.name,
-		avatarURL: character.avatar,
-		embeds: [embed]
+		avatarURL: character.avatar, 
+	})
+	if(character.image)
+	webhookClient.send(character.image, {
+		username: character.name,
+		avatarURL: character.avatar, 
 	})
 }
 
@@ -67,10 +65,15 @@ const setMessage = (message, commandLength) => {
 	write()
 	message.channel.send(`Thank you for setting today's message.`)
 }
-
+  
 client.on('message', message => {
-	if(message.channel.id === checkin && message.webhookID)
+	if(message.channel.id === checkin){
+		if(!message.webhookID){
+			character.done = true
+			write()
+		}
 		emotes.forEach(async emote => await message.react(emote))
+	}
 	if(message.content.toLowerCase().startsWith('q.pickcharacter') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
 		pickCharacter()
 	}
@@ -128,7 +131,8 @@ client.on('messageReactionAdd', async (reaction, user) => {
 cron.schedule(
 	'0 17 * * *',
 	() => {
-		pickCharacter()	  
+		if(!character.done)
+			pickCharacter()	  
 	}, {
 	scheduled: true,
 	timezone: 'Asia/Kolkata'
@@ -137,9 +141,11 @@ cron.schedule(
 cron.schedule(
 	'0 19 * * *',
 	() => {
-		sendPrompt()
+		if(!character.done)
+			sendPrompt();
 		character.image = "";
 		character.message = "";
+		character.done = false;
 		write();
 	}, {
 	scheduled: true,
@@ -148,7 +154,7 @@ cron.schedule(
 );
 
 process.on('unhandledRejection', (error) => {
-	console.log(`name: ${error.name}\nmessage: ${error.message}\npath: ${error.path}\ncode: ${error.code}\nmethod: ${error.method}`);
+	console.log('587321519051636776').send(`name: ${error.name}\nmessage: ${error.message}\npath: ${error.path}\ncode: ${error.code}\nmethod: ${error.method}`);
 });
 
 
