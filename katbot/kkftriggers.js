@@ -3,7 +3,6 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const client = new Discord.Client();
 let triggers = require("../../json/triggers.json");
-
 client.on("message", (message) => {
   if (message.author.bot || !message.member) return;
 
@@ -85,15 +84,16 @@ client.on("message", (message) => {
     triggers.some((element) => message.content.toLowerCase() === element)
     
   ) {
+    let content = message.content.split('||').join('')
     message.channel
       .createWebhook(message.member.displayName, {
         avatar: message.author.avatarURL(),
       })
       .then((webhook) => {
-        webhook.send(`||${message.content}||`).then(() => webhook.delete());
+        webhook.send(`||${content}||`).then(() => webhook.delete());
       });
     message.delete();
   }
 });
 
-client.login(config.katToken);
+client.login(config.teslaToken);
