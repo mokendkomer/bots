@@ -106,6 +106,8 @@ cron.schedule(
 	'30 18 * * *',
 	() => {
 		pickCharacter()	  
+		character.image = ""
+		write();
 	}, {
 	scheduled: true,
 	timezone: 'Asia/Kolkata'
@@ -115,8 +117,6 @@ cron.schedule(
 	'30 20 * * *',
 	() => {
 		sendPrompt()
-		character.image = ""
-		write();
 	}, {
 	scheduled: true,
 	timezone: 'Asia/Kolkata'
