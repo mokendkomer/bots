@@ -25,7 +25,7 @@ client.on('message', async (message) => {
 		//KAT PURGE END
 		//KAT BUMP START
 		if(message.channel.id === "859494849429766184"){
-			if(message.embeds[0] && message.embeds[0].image === 'https://disboard.org/images/bot-command-image-bump.png')
+			if(message.embeds[0] && message.embeds[0].image.url === 'https://disboard.org/images/bot-command-image-bump.png')
 				setTimeout(() => message.channel.send(`BUMP TIMME!`), 7200000);
 			if (message.content.toLowerCase() !== '!d bump' && !message.author.bot)
 				message.delete();
