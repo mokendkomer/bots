@@ -36,14 +36,17 @@ const sendPrompt = () => {
 	let message = `${character.message.length ? character.message + `\n\nSo, how are you feeling today?` : '**Hello! How are you feeling today?**'}\n❤️ - Amazing\n🧡 - Good\n💛 - Fine/Okay/Neutral\n🤍 - I don't know how I'm feeling right now\n💚 - I think I will be fine\n💙 - I'm struggling right now\n💜 - I'm having a really hard time and need somebody to talk to\n💔 - I'm at my lowest, and in a really dark place right now.`
 	const webhookClient = new Discord.WebhookClient(config.qcheckinWebhook.id, config.qcheckinWebhook.token)
 	// const webhookClient = new Discord.WebhookClient(config.qnotCheckinWebhook.id, config.qnotCheckinWebhook.token)
-	webhookClient.send(message, {
-		username: character.name,
-		avatarURL: character.avatar, 
-	})
 	if(character.image)
-	webhookClient.send(character.image, {
+		webhookClient.send(message, {
+			username: character.name,
+			avatarURL: character.avatar,
+			files:[
+				character.image
+			]
+		})
+	else 	webhookClient.send(message, {
 		username: character.name,
-		avatarURL: character.avatar, 
+		avatarURL: character.avatar,
 	})
 }
 
@@ -166,7 +169,7 @@ cron.schedule(
 );
 
 process.on('unhandledRejection', (error) => {
-	console.log('587321519051636776').send(`name: ${error.name}\nmessage: ${error.message}\npath: ${error.path}\ncode: ${error.code}\nmethod: ${error.method}`);
+	console.log(`name: ${error.name}\nmessage: ${error.message}\npath: ${error.path}\ncode: ${error.code}\nmethod: ${error.method}`);
 });
 
 
