@@ -89,10 +89,16 @@ client.on('ready', () => {
 	console.log('I am weady to twi mi bestt big pwomise');
 })
 
-cron.schedule('0 8-22/2 * * *', () => {
-	read()
-	remind()
-})
+cron.schedule(
+	'0 8-22/2 * * *',
+	() => {
+		read()
+		remind()
+		}, {
+	scheduled: true,
+	timezone: 'Asia/Kolkata'
+}
+);
 
 cron.schedule(
 	'0 9 * * *',
