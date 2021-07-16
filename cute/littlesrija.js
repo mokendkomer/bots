@@ -43,7 +43,7 @@ const markDone = (id) => {
 	write()
 	return 'yayayyyyayayy I gwad to heow that you aw dono wif ' + task.activity + " heow is a cookie 🍪"
 }
-const remind = (array) => {
+const remind = (array = reminders) => {
 	array.forEach(reminder => {
 		makeEmbed()
 		embed.setTitle(`🍪 wemindoww 🍪`)
@@ -79,8 +79,6 @@ client.on('message', message => {
 			read()
 			const partialReminders = reminders.filter(reminder => reminder.user === message.author.id)
 			remind(partialReminders)
-			
-
 	}
 })
 
