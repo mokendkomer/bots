@@ -77,35 +77,35 @@ client.on('message', message => {
 		}
 		emotes.forEach(async emote => await message.react(emote))
 	}
-	if(message.content.toLowerCase().startsWith('q.pickcharacter') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
+	if(message.content.toLowerCase().startsWith('q.pickcharacter') && message.member && message.member.hasPermission('MENTION_EVERYONE')){
 		pickCharacter()
 	}
-	if(message.content.toLowerCase().startsWith('q.sendprompt') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
+	if(message.content.toLowerCase().startsWith('q.sendprompt') && message.member && message.member.hasPermission('MENTION_EVERYONE')){
 		sendPrompt()
 	}
-	if(message.content.toLowerCase().startsWith('q.setimage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
+	if(message.content.toLowerCase().startsWith('q.setimage') && message.member && message.member.hasPermission('MENTION_EVERYONE')){
 		if(character.image.length)
 			return message.channel.send(`Today's image has already been set to the following image. If you'd like to overwrite this, try running \`.overwriteimage\`.\n${character.image}`)
 		setImage(message, 11)
 	}
-	if(message.content.toLowerCase().startsWith('q.overwriteimage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
+	if(message.content.toLowerCase().startsWith('q.overwriteimage') && message.member && message.member.hasPermission('MENTION_EVERYONE')){
 		setImage(message, 17)
 	}
-	if(message.content.toLowerCase().startsWith('q.getimage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
+	if(message.content.toLowerCase().startsWith('q.getimage') && message.member && message.member.hasPermission('MENTION_EVERYONE')){
 		if(character.image.length)
 			return message.channel.send(`Today's image is\n${character.image}`)
 		else
 			return message.channel.send(`Today's image has not been set yet`)
 	}
-	if(message.content.toLowerCase().startsWith('q.setmessage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
+	if(message.content.toLowerCase().startsWith('q.setmessage') && message.member && message.member.hasPermission('MENTION_EVERYONE')){
 		if(character.message.length)
 			return message.channel.send(`Today's message has already been set to the following. If you'd like to overwrite this, try running \`.overwritemessage\`.\n${character.message}`)
 		setMessage(message, 13)
 	}
-	if(message.content.toLowerCase().startsWith('q.overwritemessage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
+	if(message.content.toLowerCase().startsWith('q.overwritemessage') && message.member && message.member.hasPermission('MENTION_EVERYONE')){
 		setMessage(message, 19)
 	}
-	if(message.content.toLowerCase().startsWith('q.getmessage') && message.member && message.member.hasPermission('MANAGE_MESSAGES')){
+	if(message.content.toLowerCase().startsWith('q.getmessage') && message.member && message.member.hasPermission('MENTION_EVERYONE')){
 		if(character.message.length)
 			return message.channel.send(`Today's message is\n${character.message}`)
 		else
