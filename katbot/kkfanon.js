@@ -43,12 +43,12 @@ client.on("message", (message) => {
 		if(args[1].toLowerCase() === "support2"){
 			channel = "674618839060971550";
 			prompt = "Your message has been sent. I hope you feel better soon. Take care!";
-			substring = 14;
+			substring = 13;
 		}
 		if(args[1].toLowerCase() === "support3"){
 			channel = "698099638850289685";
 			prompt = "Your message has been sent. I hope you feel better soon. Take care!";
-			substring = 15;
+			substring = 13;
 		}
 		if(message.content.includes('@everyone') || message.content.includes('@here') || message.content.includes('<@'))
 		    return message.channel.send(`Your message is not allowed to ping anyone.`)
