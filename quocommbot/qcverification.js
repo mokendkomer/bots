@@ -52,7 +52,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
 	let message = reaction.message
 	let embed = message.embeds[0];
 	if(embed.title === "A user joined" && reaction.emoji.name === "✅"){
-		client.channels.cache.get(verification).send(`Welcome to QuoComm <@${embed.footer.text}>! Please follow the steps as they are written.\n\n1. Please send your Quora  name here.\n2. Send \`${Math.floor(100000 + Math.random() * 900000)}\` to <${verifier.link}> in Quora DMs to verify yourself.\n3. Verification may take a few minutes, so feel free to read through #read-me while you wait.\n\nIf you need help, please ping an online moderator and they will shortly assist you.`)
+		client.channels.cache.get(verification).send(`Welcome to QuoComm <@${embed.footer.text}>! Please follow the steps as they are written.\n\n1. Please send your Quora  name here.\n2. Send \`${Math.floor(100000 + Math.random() * 900000)}\` to <${verifier.link}> in Quora DMs to verify yourself.\n3. Verification may take a few minutes, so feel free to read through <#${readme}> while you wait.\n\nIf you need help, please ping an online moderator and they will shortly assist you.`)
 		embed.setTitle(`Pending verification`);
 		embed.setDescription(`The verifier is ${user.username}`)
 		message.edit(embed).then(msg => {

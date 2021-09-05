@@ -58,7 +58,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
 
 client.on('guildMemberUpdate', (oldMember, newMember) => {
     if (!oldMember.roles.cache.get(verifiedRole) && newMember.roles.cache.get(verifiedRole))
-        client.channels.cache.get(mainChannel).send("Welcome to KendraKat Foundation <@" + newMember.id + ">!\nThis is the beginning of loving yourself\nWelcome home 💖");
+        client.channels.cache.get(mainChannel).send("Welcome to KendraKat Foundation <@" + newMember.id + ">!\nThis is the beginning of loving yourself totally & completely, right where you are\nWelcome home 💖");
 
 });
 
