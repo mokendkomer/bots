@@ -54,12 +54,12 @@ cron.schedule(
 			.setColor("#0a9ba6")
 			.setAuthor("Mokendbear", client.users.cache.get(mokendDm).avatarURL())
 			.setTitle(`Mukund's productivity for today! ${mokendbear}`)
-			.setDescription(`**Things done**\n${mokendprod.activities}${mokendprod.activities.startsWith("nono") ? `` : `\n\n Mokend is ${mokendprod.satisfied.startsWith("y") ? "happy" : "not happy"} with his productivity today ${mokendprod.satisfied.startsWith("y") ? "" : "because " + mokendprod.reason}`}`);
+			.setDescription(`**Things done**\n${mokendprod.activities}${mokendprod.activities.startsWith("nono") ? `` : `\n\n I am ${mokendprod.satisfied.startsWith("y") ? "happy" : "not happy"} with my productivity today ${mokendprod.satisfied.startsWith("y") ? "" : "because " + mokendprod.reason}`}`);
 		let srijaEmbed = new Discord.MessageEmbed()
 			.setColor("#0a9ba6")
 			.setAuthor("Srijabear", client.users.cache.get(srijaDm).avatarURL())
 			.setTitle(`Srija's productivity for today!  ${srijabear}`)
-			.setDescription(`**Things done**\n${srijaprod.activities}${srijaprod.activities.startsWith("nono") ? `` : `\n\n Srija is ${srijaprod.satisfied.startsWith("y") ? "happy" : "not happy"} with her productivity today ${srijaprod.satisfied.startsWith("y") ? "" : "because " + srijaprod.reason}`}`);
+			.setDescription(`**Things done**\n${srijaprod.activities}${srijaprod.activities.startsWith("nono") ? `` : `\n\n I am ${srijaprod.satisfied.startsWith("y") ? "happy" : "not happy"} with my productivity today ${srijaprod.satisfied.startsWith("y") ? "" : "because " + srijaprod.reason}`}`);
 
 		client.channels.cache.get(prodchannel).send(mokendEmbed);
 		client.channels.cache.get(prodchannel).send(srijaEmbed);
