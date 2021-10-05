@@ -134,8 +134,8 @@ client.on("message", async (message) => {
 				message.channel.send("oki okiii, awe you happy wif how pwoductive you woww?");
 				return;
 			} else if (srijaprod.satisfied === "") {
-				srijaprod.satisfied = message.content;
-				if (message.content.startsWith("n")) return message.channel.send("owwiee oki, and is theow any weason fow that");
+				srijaprod.satisfied = message.content.toLowerCase();
+				if (message.content.toLowerCase().startsWith("n")) return message.channel.send("owwiee oki, and is theow any weason fow that");
 				else return message.channel.send("okii fank woo fow hewping wif yow answows todayy MWAH :cookie:");
 			} else if (srijaprod.satisfied.startsWith("n") && srijaprod.reason === "") {
 				srijaprod.reason = message.content;
