@@ -9,8 +9,7 @@ const sendMessage = (message, response) => {
 	if (response.data.country) {
 		embed.setTitle("COVID-19 Stats for " + response.data.country);
 		embed.setThumbnail(response.data.countryInfo.flag);
-	}
-	else {
+	} else {
 		embed.setTitle("WorldWide COVID-19 Stats");
 		embed.setThumbnail("https://icons.iconarchive.com/icons/dtafalonso/modern-xp/512/ModernXP-73-Globe-icon.png");
 	}
@@ -26,7 +25,9 @@ const sendMessage = (message, response) => {
 	embed.addField("Total Recovered", response.data.recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), true);
 	embed.addField("Total Deaths", response.data.deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), true);
 	embed.setFooter(`Tests: ${response.data.tests.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`, message.guild.iconURL());
-	message.channel.send({ embed });
+	message.channel.send({
+		embed
+	});
 }
 // /covidstats
 
@@ -84,7 +85,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
 	}
 	//HALL OF FAME
 	if (
-		(!reaction.me && reaction.emoji.name === "⭐" && reaction.count === 4) ||
+		(!reaction.me && reaction.emoji.name === "⭐" && reaction.count === 6) ||
 		(reaction.emoji.name === "🏆" &&
 			reaction.message.guild.member(user).roles.cache.get("587184713387606017"))
 	) {
@@ -110,11 +111,15 @@ client.on("messageReactionAdd", async (reaction, user) => {
 				reaction.message.attachments.first().url.includes(".gif")
 			)
 				embed.setImage(reaction.message.attachments.first().url);
-			client.channels.cache.get(channel).send({ embed });
-		} else client.channels.cache.get(channel).send({ embed });
+			client.channels.cache.get(channel).send({
+				embed
+			});
+		} else client.channels.cache.get(channel).send({
+			embed
+		});
 		reaction.message.react("⭐");
 	}
-// / hall of fame
+	// / hall of fame
 });
 
 client.login(config.QuoCommToken);
