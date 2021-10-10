@@ -52,7 +52,7 @@ client.on("message", (message) => {
 		}
 		if(message.content.includes('@everyone') || message.content.includes('@here') || message.content.includes('<@'))
 		    return message.channel.send(`Your message is not allowed to ping anyone.`)
-		client.channels.cache.get('642537988902879242').send(`${member.displayName} sent ${message.content.substring(substring)} in <#${channel}>`);
+		client.channels.cache.get('642537988902879242').send(`|| ${member.displayName} || sent ${message.content.substring(substring)} in <#${channel}>`);
 		client.channels.cache.get(channel).send(`${message.content.substring(substring)}`);
 		message.channel.send(prompt);
 });
