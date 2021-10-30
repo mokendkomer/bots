@@ -4,7 +4,7 @@ const fs = require("fs");
 const client = new Discord.Client();
 let triggers = require("../../json/triggers.json");
 client.on("message", (message) => {
-	if (message.author.bot || !message.member) return;
+	if ((message.author.bot && message.author.id !== 860957953556480013) || !message.member) return;
 
 	if (message.content.toLowerCase().startsWith("addtw ")) {
 		if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(`:warning: You don't have permission to add trigger words. Please DM a moderator or admin if you want to add one.`);
