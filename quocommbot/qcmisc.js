@@ -1,11 +1,10 @@
 const config = require("../../json/config.json");
 const Discord = require("discord.js");
 const client = new Discord.Client();
-// covidstats
 const axios = require("axios").default;
 const sendMessage = (message, response) => {
 	const embed = new Discord.MessageEmbed();
-	embed.setColor("0x" + message.member.roles.highest.hexColor)
+	embed.setColor("0x" + message.member.roles.highest.hexColor);
 	if (response.data.country) {
 		embed.setTitle("COVID-19 Stats for " + response.data.country);
 		embed.setThumbnail(response.data.countryInfo.flag);
@@ -13,7 +12,7 @@ const sendMessage = (message, response) => {
 		embed.setTitle("WorldWide COVID-19 Stats");
 		embed.setThumbnail("https://icons.iconarchive.com/icons/dtafalonso/modern-xp/512/ModernXP-73-Globe-icon.png");
 	}
-	console.log(response.data)
+	console.log(response.data);
 	embed.setAuthor(message.member.nickname, message.author.avatarURL());
 	embed.addField("Cases Today", response.data.todayCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), true);
 	embed.addField("Active", response.data.active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), true);
@@ -26,49 +25,32 @@ const sendMessage = (message, response) => {
 	embed.addField("Total Deaths", response.data.deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), true);
 	embed.setFooter(`Tests: ${response.data.tests.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`, message.guild.iconURL());
 	message.channel.send({
-		embed
+		embed,
 	});
-}
+};
 // /covidstats
-
 
 client.on("message", async (message) => {
 	// bump
 	if (message.channel.id === "861765154768289862") {
-		if (
-			message.embeds[0] &&
-			message.embeds[0].image.url ===
-			"https://disboard.org/images/bot-command-image-bump.png"
-		)
-			setTimeout(
-				() => message.channel.send(`GO BUMP :rage: <@&862020101544345600>`),
-				7200000
-			);
-		if (message.content.toLowerCase() !== "!d bump" && !message.author.bot)
-			message.delete();
+		if (message.embeds[0] && message.embeds[0].image.url === "https://disboard.org/images/bot-command-image-bump.png") setTimeout(() => message.channel.send(`GO BUMP :rage: <@&862020101544345600>`), 7200000);
+		if (message.content.toLowerCase() !== "!d bump" && !message.author.bot) message.delete();
 	}
 	// /bump
 	// covidstats
-	if (
-		(message.channel.id === "849193476372430860" ||
-			message.channel.id === "587152950078734348") &&
-		message.content.toLowerCase().startsWith("q.corona")
-	) {
+	if ((message.channel.id === "849193476372430860" || message.channel.id === "587152950078734348") && message.content.toLowerCase().startsWith("q.corona")) {
 		let country = message.content.toLowerCase().substr(9);
-		if (!country.length)
-			country = "all"
-		else
-			country = `countries/${country}`
+		if (!country.length) country = "all";
+		else country = `countries/${country}`;
 		axios
 			.get("https://disease.sh/v3/covid-19/" + country)
 			.then((response) => sendMessage(message, response))
 			.catch((error) => {
-				console.log(error)
-				message.channel.send("Something went wrong")
-			})
+				console.log(error);
+				message.channel.send("Something went wrong");
+			});
 	}
 	// /covidstats
-
 });
 
 client.on("messageReactionAdd", async (reaction, user) => {
@@ -84,39 +66,21 @@ client.on("messageReactionAdd", async (reaction, user) => {
 		}
 	}
 	//HALL OF FAME
-	if (
-		(!reaction.me && reaction.emoji.name === "⭐" && reaction.count === 6) ||
-		(reaction.emoji.name === "🏆" &&
-			reaction.message.guild.member(user).roles.cache.get("587184713387606017"))
-	) {
+	if ((!reaction.me && reaction.emoji.name === "⭐" && reaction.count === 6) || (reaction.emoji.name === "🏆" && reaction.message.guild.member(user).roles.cache.get("587184713387606017"))) {
 		const channel = "848815102664114176";
 		let embed = new Discord.MessageEmbed();
-		embed.setAuthor(
-			reaction.message.member.displayName,
-			reaction.message.author.avatarURL()
-		);
-		if (reaction.message.content)
-			embed.setDescription(
-				`**${reaction.message.content}**\nclick [here](${reaction.message.url}) to jump to the message`
-			);
-		else
-			embed.setDescription(
-				`click [here](${reaction.message.url}) to jump to the message`
-			);
+		embed.setAuthor(reaction.message.member.displayName, reaction.message.author.avatarURL());
+		if (reaction.message.content) embed.setDescription(`**${reaction.message.content}**\nclick [here](${reaction.message.url}) to jump to the message`);
+		else embed.setDescription(`click [here](${reaction.message.url}) to jump to the message`);
 		if (reaction.message.attachments.size > 0) {
-			if (
-				reaction.message.attachments.first().url.includes(".png") ||
-				reaction.message.attachments.first().url.includes(".jpg") ||
-				reaction.message.attachments.first().url.includes(".jpeg") ||
-				reaction.message.attachments.first().url.includes(".gif")
-			)
-				embed.setImage(reaction.message.attachments.first().url);
+			if (reaction.message.attachments.first().url.includes(".png") || reaction.message.attachments.first().url.includes(".jpg") || reaction.message.attachments.first().url.includes(".jpeg") || reaction.message.attachments.first().url.includes(".gif")) embed.setImage(reaction.message.attachments.first().url);
 			client.channels.cache.get(channel).send({
-				embed
+				embed,
 			});
-		} else client.channels.cache.get(channel).send({
-			embed
-		});
+		} else
+			client.channels.cache.get(channel).send({
+				embed,
+			});
 		reaction.message.react("⭐");
 	}
 	// / hall of fame
