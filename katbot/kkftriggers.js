@@ -3,6 +3,13 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const client = new Discord.Client();
 let triggers = require("../../json/triggers.json");
+const whitelist = [
+	"917109507224649830", //moderation
+	"696072776296956094", //senior moderation
+	"641835049066561537", //admin lounge
+	"695073113578405908", //staff voting
+	"917089077600329808", //staff voting
+];
 client.on("message", (message) => {
 	if ((message.author.bot && message.author.id !== 860957953556480013) || !message.member) return;
 
@@ -45,6 +52,7 @@ client.on("message", (message) => {
 	}
 
 	if (triggers.some((element) => message.content.toLowerCase().includes(" " + element + " ")) || triggers.some((element) => message.content.toLowerCase().startsWith(element + " ")) || triggers.some((element) => message.content.toLowerCase().endsWith(" " + element)) || triggers.some((element) => message.content.toLowerCase() === element)) {
+		if (whitelist.includes(message.channel.id)) return;
 		let content = message.content.split("||").join("");
 		message.channel
 			.createWebhook(message.member.displayName, {
