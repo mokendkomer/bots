@@ -8,7 +8,6 @@ const whitelist = [
 	"696072776296956094", //senior moderation
 	"641835049066561537", //admin lounge
 	"695073113578405908", //staff voting
-	"917089077600329808", //staff voting
 ];
 client.on("message", (message) => {
 	if ((message.author.bot && message.author.id !== 860957953556480013) || !message.member) return;

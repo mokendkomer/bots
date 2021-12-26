@@ -1,7 +1,9 @@
 const config = require("../../json/config.json");
 const Discord = require("discord.js");
 const ms = require("ms");
-const client = new Discord.Client();
+const client = new Discord.Client({
+	partials: ["MESSAGE", "REACTION"],
+});
 
 client.on("message", async (message) => {
 	//KAT PURGE START
@@ -137,5 +139,37 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
 });
 
 //SUPPORT LOG END
+
+//SUPPORT CHOICE START
+
+client.on("messageReactionAdd", async (reaction, user) => {
+	// When a reaction is received, check if the structure is partial
+	if (reaction.partial) {
+		// If the message this reaction belongs to was removed, the fetching might result in an API error which should be handled
+		try {
+			await reaction.fetch();
+		} catch (error) {
+			console.error("Something went wrong when fetching the message:", error);
+			// Return as `reaction.message.author` may be undefined/null
+			return;
+		}
+	}
+
+	if (reaction.message.channel.id === "923448079221391370") {
+		if (reaction.emoji.name === "👍") {
+			const member = reaction.message.guild.members.cache.get(user.id);
+			member.roles.add("859443785578053672");
+			member.roles.remove("924738195906781244");
+		}
+		if (reaction.emoji.name === "👎") {
+			const member = reaction.message.guild.members.cache.get(user.id);
+			member.roles.remove("924738195906781244");
+			client.channels.cache.get("923448079221391370").send(`${member.displayName} rejected the supporter rules and guidelines. We didn't want you anyway.`);
+		}
+		reaction.users.remove(user.id);
+	}
+});
+
+//SUPPORT CHOICE END
 
 client.login(config.katToken);
