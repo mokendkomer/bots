@@ -164,7 +164,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
 		if (reaction.emoji.name === "👎") {
 			const member = reaction.message.guild.members.cache.get(user.id);
 			member.roles.remove("924738195906781244");
-			client.channels.cache.get("923448079221391370").send(`${member.displayName} rejected the supporter rules and guidelines. We didn't want you anyway.`);
+			client.channels.cache.get("678774284562202664").send(`${member.displayName} rejected the supporter rules and guidelines.`);
 		}
 		reaction.users.remove(user.id);
 	}
