@@ -160,6 +160,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
 			const member = reaction.message.guild.members.cache.get(user.id);
 			member.roles.add("859443785578053672");
 			member.roles.remove("924738195906781244");
+			client.channels.cache.get("678774284562202664").send(`${member.displayName} accepted the supporter rules and guidelines.`);
 		}
 		if (reaction.emoji.name === "👎") {
 			const member = reaction.message.guild.members.cache.get(user.id);
