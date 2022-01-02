@@ -91,7 +91,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
 		}
 	}
 
-	if (((reaction.message.channel.id !== kkfPendingVerification || reaction.message.channel.id !== MNPendingVerification) && !reaction.message.guild.member(user).hasPermission("MANAGE_ROLES")) || reaction.me) return;
+	if (((reaction.message.channel.id !== kkfPendingVerification || reaction.message.channel.id !== MNPendingVerification) && !reaction.message.guild.member(user).hasPermission("KICK_MEMBERS")) || reaction.me) return;
 	if (reaction.message.guild.id === "912015219721662494") reaction.message.guild.member(reaction.message.embeds[0].footer.text).roles.add(MNVerifiedRole);
 	if (reaction.message.guild.id === "641530868267089920") reaction.message.guild.member(reaction.message.embeds[0].footer.text).roles.add(kkfVerifiedRole);
 });
