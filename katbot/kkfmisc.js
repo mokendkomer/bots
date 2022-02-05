@@ -155,7 +155,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
 		}
 	}
 
-	if (reaction.message.channel.id === "923448079221391370") {
+	if (reaction.message.channel.id === "923448079221391370" && !reaction.me) {
 		if (reaction.emoji.name === "👍") {
 			const member = reaction.message.guild.members.cache.get(user.id);
 			member.roles.add("859443785578053672");
