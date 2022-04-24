@@ -4,7 +4,7 @@ const client = new Discord.Client({
 	partials: ["MESSAGE", "REACTION"],
 });
 const emojiname = ["whiteflower", "blueflower", "greenflower", "pinkflower", "deeppinkflower", "blackflower", "deeppurpleflower", "purpleflower", "orangeflower", "redflower", "tealflower", "yellowflower", "🎉", "🔈", "🎮", "♂️", "♀️", "💟", "redheart", "whiteheart", "greenheart", "blueheart", "purpleheart", "pinkheart", "yellowheart", "bluebutterfly", "pinkbutterfly", "whitebutterfly", "yellowbutterfly", "greenbutterfly1", "red_butterfly1", "yellowspark", "whitespark", "redspark"];
-const rolename = ["Dissociative Identity", "Antisocial Personality", "Eating Disorder", "PTSD", "Depression", "Schizophrenia", "Anxiety Disorder", "OCD", "Bipolar Disorder", "Borderline Personality", "ADHD", "Autism Spectrum Disorder", "Event Pings", "VC", "Gaming", "Male", "Female", "Other", "Anger Issues", "Emotional Unease", "Gender Dysphoria", "Panic Attacks", "Paranoia", "Self-harm", "Trust Issues", "He/Him", "She/Her", "They/Them", "Unsure/Other", "Self Help", "TW Support", "DMs Open", "Ask to DM", "DMs Closed"];
+const rolename = ["Dissociative Disorders", "Antisocial Personality", "Eating Disorder", "PTSD", "Depression", "Schizophrenia", "Anxiety Disorder", "OCD", "Bipolar Disorder", "Borderline Personality", "ADHD", "Autism Spectrum Disorder", "Event Pings", "VC", "Gaming", "Male", "Female", "Other", "Anger Issues", "Emotional Unease", "Gender Dysphoria", "Panic Attacks", "Paranoia", "Self-harm", "Trust Issues", "He/Him", "She/Her", "They/Them", "Unsure/Other", "Self Help", "TW Support", "DMs Open", "Ask to DM", "DMs Closed"];
 
 client.on("messageReactionAdd", async (reaction, user) => {
 	if (reaction.partial) {
