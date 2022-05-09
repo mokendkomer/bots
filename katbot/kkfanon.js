@@ -29,7 +29,7 @@ client.on("message", (message) => {
 		substring = 11;
 	}
 	if (args[1].toLowerCase() === "supportervent") {
-		if (!message.member.roles.cache.get("859443785578053672")) return message.channel.send(`Sorry, you're not a supporter.`);
+		if (!client.guilds.cache.get("641530868267089920").member(message.author.id).roles.cache.get("859443785578053672")) return message.author.send(`Sorry, you're not a supporter.`);
 		channel = "972738890098163792";
 		prompt = "Your message has been sent. I hope you feel better soon. Take care!";
 		substring = 18;
