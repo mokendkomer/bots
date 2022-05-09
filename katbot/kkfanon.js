@@ -9,7 +9,6 @@ client.on("message", (message) => {
 	const member = client.guilds.cache.get("641530868267089920").member(message.author.id);
 	if (!member || !member.roles.cache.some((role) => role.id === "642545338112016408")) return message.channel.send(`Oh no! I don't know you.`);
 	if (member.roles.cache.some((role) => role.id === "859443846965755915")) return message.channel.send(`Sorry, you're muted.`);
-	if (message.content.includes("@everyone") || message.content.includes("@here") || message.content.includes("<@")) return message.channel.send(`Your message is not allowed to ping anyone.`);
 
 	let channel = "",
 		prompt = "",
@@ -33,7 +32,7 @@ client.on("message", (message) => {
 		if (!message.member.roles.cache.get("859443785578053672")) return message.channel.send(`Sorry, you're not a supporter.`);
 		channel = "972738890098163792";
 		prompt = "Your message has been sent. I hope you feel better soon. Take care!";
-		substring = 14;
+		substring = 18;
 	}
 	if (args[1].toLowerCase() === "support") {
 		channel = "642037072890429451";
@@ -55,6 +54,7 @@ client.on("message", (message) => {
 		prompt = "Your message has been sent. I hope you feel better soon. Take care!";
 		substring = 13;
 	}
+	if (message.content.includes("@everyone") || message.content.includes("@here") || message.content.includes("<@")) return message.channel.send(`Your message is not allowed to ping anyone.`);
 	client.channels.cache.get("642537988902879242").send(`|| ${member.displayName} || sent ${message.content.substring(substring)} in <#${channel}>`);
 	client.channels.cache.get(channel).send(`${message.content.substring(substring)}`);
 	message.channel.send(prompt);
