@@ -6,6 +6,11 @@ const client = new Discord.Client({
 });
 
 client.on("message", async (message) => {
+		// SCREAM INTO VOID START
+	if (message.channel.id === "993121749845688320") {
+		message.delete();
+	}
+	// SCREAM INTO VOID END
 	//KAT PURGE START
 	if (message.content.toLowerCase().startsWith("kat purge")) {
 		const misperms = `⚠️ <@${message.author.id}> You seem to be missing the permissions to run this command.`;
