@@ -6,9 +6,9 @@ const client = new Discord.Client({
 });
 
 client.on("message", async (message) => {
-		// SCREAM INTO VOID START
+	// SCREAM INTO VOID START
 	if (message.channel.id === "993121749845688320") {
-		message.delete();
+		setTimeout(() => message.delete(), 300);
 	}
 	// SCREAM INTO VOID END
 	//KAT PURGE START
